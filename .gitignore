@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Lessons/bin
+/Lessons/app.js.map
+/Lessons/obj/Debug
+*.suo
+*.user
+/Lessons/app.js

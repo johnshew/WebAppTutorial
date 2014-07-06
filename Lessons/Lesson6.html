@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app>
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" data-require="bootstrap-css@3.1.1" data-semver="3.1.1" />
+</head>
+
+<body ng-controller="demoController">
+
+  <div class="alert alert-info">
+    <a href="#" class="close" data-dismiss="alert">&times;</a>Here we show how can seperate the "view" and the "code".
+    <br/>The view is just the HTML. And the code is now just in a function called a Controller.
+    <br/>We attach the controller function to the view with the ng-controller directive on the body element.
+    <br/>This means that there is now no code at all in the HTML.
+    <br/>When Angular sees the <em><span>{</span>{ variable <span>}</span>}</em> syntax it binds to objects in $scope
+    <br/>Angular uses $scope as the "model" that glues together the view and the code.
+  </div>
+
+  <div ng-container="">
+    <div class="row">
+      <div ng-repeat="person in people | orderBy:'age'">
+        <div class="col-sm-6 col-md-4 col-lg-2">
+          <div class="panel panel-default">
+            <div class="panel-heading">{{ person.name }}</div>
+            <div class="panel-body">Age: {{ person.age }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="http://code.jquery.com/jquery-2.0.3.min.js" data-require="jquery@*" data-semver="2.0.3"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" data-require="bootstrap@3.1.1" data-semver="3.1.1"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js" data-require="angular.js@1.2.17" data-semver="1.2.17"></script>
+  <script>
+    function demoController($scope) {
+      $scope.people = [{
+        'name': 'Chris',
+        'age': 10
+      }, {
+        'name': 'Alex',
+        'age': 13
+      }, {
+        'name': 'Kelly',
+        'age': 11
+      }, {
+        'name': 'Sam',
+        'age': 12
+      }];
+    }
+  </script>
+</body>
+
+</html>

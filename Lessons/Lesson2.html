@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+  <title>Lesson</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
+</head>
+<body>
+  <p>Here we introduce the other important javascript library we will be working with called Angular. </p>
+  <p>
+    Note the use of the Angular directive <em>ng-app</em> on the html tag.  This tells Angular that it should operate on this document.
+    The directive <em>ng-model</em> directive binds the input box to the javaScript varible <em>whatIsTyped.</em>
+    And finally <span>{</span>{ whatIsTyped}<span>}</span> displays this variable.
+  </p>
+  <p>Try typing into the text box and notice how Angular does "binding" between the data in the text box and the HTML that follows. There is no "coding" required for this to work - it is very cool.</p>
+  <div>
+    <input type="text" ng-model="whatIsTyped">
+  </div>
+  <div>You typed: {{ whatIsTyped }}</div>
+</body>
+</html>
