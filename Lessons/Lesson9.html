@@ -10,11 +10,15 @@
 
   <div class="alert alert-info">
     <a href="#" class="close" data-dismiss="alert">&times;</a>
-    <p>Using $scope.$watch</p>
+    <p>Here we look at how we can use $watch to update the model and view. 
+    </p>
     <p>
-      Here we use $scope.$watch to track changes to our model.  
-      As the model changes the view and other parts of the model can be updated. 
-      Notice the use of <em>ng-show</em> directive to show/hide various HTML elements based on changes to the model.
+      In this example use $scope.$watch to track changes to our model.
+      As the $scope variable <em>sortField</em> and <em>sortAscending</em> change
+      we use $watch to automatically update <em>sort</em>.
+    </p><p>
+      And notice the use of the <em>ng-show</em> directive to show and hide various HTML elements 
+      based on changes to these variables.
     </p>
   </div>
 
