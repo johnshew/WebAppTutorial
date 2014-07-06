@@ -2,21 +2,29 @@
 <html ng-app>
 
 <head>
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" data-require="bootstrap-css@3.1.1" data-semver="3.1.1" />
+  <title>Lesson</title>
+  <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" data-require="bootstrap-css@3.1.1" data-semver="3.1.1" />
 </head>
 
 <body ng-init="people=[{ 'name': 'Chris', 'age':10 }, {'name':'Alex', 'age':13}, {'name': 'Sam', 'age':12}]">
 
   <div class="alert alert-info">
     <a href="#" class="close" data-dismiss="alert">&times;</a>
-    This lesson shows using bootstrap and angular together.
-    <br/>It shows the use of a bootstrap panel to create a "Card" for each person.
-    <br/>It shows the use of a bootstrap alert that can be dismissed.
-    <br/>We also moved all the script tags to after the body HTML - in general this can help speed up rendering.
+    <p>This lesson shows using Bootstrap and Angular together.</p>
+    <p>
+      Here we show the use of a Bootstrap panel to create a "Card" for each person.  
+      This kind of "card" have become an common user interface metaphor that 
+      we will use over the next few lessons.
+    </p>
+    <p>
+      A few more changes to note... 
+      We included the Bootstrap scripts so we can easily create an dismissable "alert" at the top of the page.  
+      And we moved all the script tags to end of the HTML body - in general this can help speed up rendering.
+    </p>
   </div>
 
-  <div ng-container="">
-    <div class="row">
+  <div class="container">
+    <div ng-container class="row">
       <div ng-repeat="person in people | orderBy:'age'">
         <div class="col-sm-6 col-md-4 col-lg-2">
           <div class="panel panel-default">
@@ -28,10 +36,9 @@
     </div>
   </div>
 
-  <script src="http://code.jquery.com/jquery-2.0.3.min.js" data-require="jquery@*" data-semver="2.0.3"></script>
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" data-require="bootstrap@3.1.1" data-semver="3.1.1"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js" data-require="angular.js@1.2.17" data-semver="1.2.17"></script>
+  <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
 
 </body>
-
 </html>

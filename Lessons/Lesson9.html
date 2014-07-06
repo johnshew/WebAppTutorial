@@ -10,16 +10,25 @@
 
   <div class="alert alert-info">
     <a href="#" class="close" data-dismiss="alert">&times;</a>
-    <p>Now that everything is nicely factored, lets do a little more Angular magic in the controller.</p>
+    <p>Using $scope.$watch</p>
     <p>
-      Here we introduce some buttons and a text input field for sorting and filtering.
+      Here we use $scope.$watch to track changes to our model.  
+      As the model changes the view and other parts of the model can be updated. 
+      Notice the use of <em>ng-show</em> directive to show/hide various HTML elements based on changes to the model.
     </p>
   </div>
 
   <div class="well">
-    <button class="btn btn-default" ng-click="sortButtonClick('name')">Name</button>
-    <button class="btn btn-default" ng-click="sortButtonClick('age')">Age</button>
-    <input type="text" class="btn" ng-model="filterText" placeholder="Search"/>
+    <button class="btn btn-default" ng-click="sortButtonClick('name')">
+      Name
+      <span ng-show="sortField=='name'">{{(sortAscending)?'+':'-'}}</span>
+    </button>
+    <button class="btn btn-default" ng-click="sortButtonClick('age')">
+      Age
+      <span ng-show="sortField=='age'">{{(sortAscending)?'+':'-'}}</span>
+    </button>
+    <input type="text" class="btn" ng-model="filterText" placeholder="Search" /> 
+    orderBy: {{ sort }} and filter: {{filterText}}
   </div>
 
   <div class="container">
@@ -59,8 +68,21 @@
         'age': 11
       }];
 
-      $scope.sort = "name";
-      $scope.sortButtonClick = function (field) { $scope.sort = field; };
+      // sort, sortField, sortAscending, sortButtonClick(field)
+      $scope.$watch('sortField', function () {
+          $scope.sortAscending = true;
+        });
+      $scope.$watch('sortField+sortAscending', function () {
+        $scope.sort = (($scope.sortAscending) ? "+" : "-") + $scope.sortField;
+      });
+
+      $scope.sortField = "name";
+
+      $scope.sortButtonClick = function (field) {
+        $scope.sortField = field;
+        $scope.sortAscending = !$scope.sortAscending;
+      };
+
 
     });
   </script>
