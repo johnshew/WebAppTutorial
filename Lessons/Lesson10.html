@@ -31,7 +31,7 @@
   <div class="container" ng-hide="showDetail">
     <div ng-container class="row">
       <div ng-repeat="person in people | filter:filterText | orderBy:sort">
-        <div class="col-sm-6 col-md-4 col-lg-2">
+        <div class="col-sm-6 col-md-4 col-lg-3">
           <div class="panel panel-default" ng-click="editPerson(person)">
             <div class="panel-heading">{{ person.name }}</div>
             <div class="panel-body">Age: {{ person.age }}</div>
