@@ -18,6 +18,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app.css" />
+    <Content Include="CloudDataFacebook.html" />
     <Content Include="index.html" />
     <Content Include="Lesson1.html" />
     <Content Include="Lesson10.html" />
