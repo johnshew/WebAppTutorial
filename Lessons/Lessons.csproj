@@ -20,21 +20,26 @@
     <Content Include="app.css" />
     <Content Include="index.html" />
     <Content Include="Lesson1.html" />
+    <Content Include="Lesson10.html" />
     <Content Include="Lesson2.html" />
     <Content Include="Lesson3.html" />
     <Content Include="Lesson4.html" />
     <Content Include="Lesson5.html" />
     <Content Include="Lesson6.html" />
     <Content Include="Lesson7.html" />
-    <Content Include="Lesson10.html" />
+    <Content Include="CloudData.html" />
     <Content Include="Lesson8.html" />
     <Content Include="Lesson9.html" />
+    <Content Include="MasonryLayout.html" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\README.md">
+      <Link>README.md</Link>
+    </Content>
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

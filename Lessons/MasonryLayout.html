@@ -10,7 +10,10 @@
 
   <div class="alert alert-info">
     <a href="#" class="close" data-dismiss="alert">&times;</a>
-    <p>Here we add some additional logic to the controller to enable a master/detail view with create, update, and delete operations.</p>
+    <p>
+      Masonary, Isotope, and Packery are very powerful layout tools that work with the modern "card" UI found in many modern applications.
+    </p>
+    <p>Here we show the use of Masonry working with Bootstrap and Angular to do some really nice layout.</p>
   </div>
 
   <div class="well" ng-hide="showDetail">
@@ -28,15 +31,11 @@
     Add<button class="btn btn-default" ng-click="addButtonClick()">New</button>
   </div>
 
-  <div class="container" ng-hide="showDetail">
-    <div ng-container class="row">
-      <div ng-repeat="person in people | filter:filterText | orderBy:sort">
-        <div class="col-sm-6 col-md-4 col-lg-2">
-          <div class="panel panel-default" ng-click="editPerson(person)">
-            <div class="panel-heading">{{ person.name }}</div>
-            <div class="panel-body">Age: {{ person.age }}</div>
-          </div>
-        </div>
+  <div masonry ng-hide="showDetail">
+    <div class="masonry-brick col-sm-6 col-md-4 col-lg-3" ng-repeat="person in people | filter:filterText | orderBy:sort">
+      <div class="panel panel-default" ng-click="editPerson(person)">
+        <div class="panel-heading">{{ person.name }}</div>
+        <div class="panel-body">Age: {{ person.age }}</div>
       </div>
     </div>
   </div>
@@ -53,9 +52,12 @@
   <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
   <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.1.5/masonry.pkgd.min.js"></script>
+  <script src="https://passy.github.io/angular-masonry/bower_components/imagesloaded/imagesloaded.js"></script>
+  <script src="https://passy.github.io/angular-masonry/angular-masonry.js"></script>
 
   <script>
-    var app = angular.module('demoApp', []);
+    var app = angular.module('demoApp', ['wu.masonry']);
     app.controller('demoController', function ($scope) {
       $scope.people = [{
         'name': 'Chris',
