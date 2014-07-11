@@ -4,7 +4,7 @@ In these lessons we introduce new concepts from Bootstrap and Angular one step a
 
 The lessons are hosted on GitHub at http://johnshew.github.io/WebAppTutorial/Lessons/
 
-The individual lessons are available as easily editable examples on http://plnkr.co/tags/johnshew,tutorial.
+Many of the individual lessons are also available as easily editable examples on http://plnkr.co/tags/johnshew,tutorial.
 
 Hope you find this tutorial easy to follow and useful.
 
