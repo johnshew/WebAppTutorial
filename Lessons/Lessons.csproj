@@ -32,7 +32,6 @@
     <Content Include="Lesson8.html" />
     <Content Include="Lesson9.html" />
     <Content Include="MasonryLayout.html" />
-    <Content Include="Typescript\app.js" />
     <Content Include="Typescript\index.html" />
     <Content Include="web.config" />
   </ItemGroup>
