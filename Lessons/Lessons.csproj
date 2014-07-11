@@ -35,10 +35,7 @@
     <Content Include="Lesson8.html" />
     <Content Include="Lesson9.html" />
     <Content Include="MasonryLayout.html" />
-<<<<<<< HEAD
-=======
     <Content Include="Typescript\index.html" />
->>>>>>> master
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
