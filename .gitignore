@@ -3,9 +3,6 @@
 ################################################################################
 
 /Lessons/bin
-/Lessons/app.js.map
-/Lessons/app.js
 /Lessons/obj/Debug
 *.suo
 *.user
-
