@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="demoApp">
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" data-require="bootstrap-css@3.1.1" data-semver="3.1.1" />
+</head>
+
+<body ng-controller="demoController">
+
+  <div class="alert alert-info">
+    <a href="#" class="close" data-dismiss="alert">&times;</a>
+    This lesson shows the use of predefined modules - specifically modules in the Angular Cloud Data Connector.
+    <br/>Now when we create our demoApp module it depends on two other modules that we loaded in the script tags.
+    <br/>We then call some functions in thouse modules to add some data to the Angular $scope.
+    <br/>Try running this application twice. It will load more quickly the second time because the data has been stored locally.
+  </div>
+
+  <div ng-container class="container">
+    <div class="row">
+      <div ng-repeat="person in people">
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="panel panel-default">
+            <div class="panel-heading">{{ person.firstname }} {{ person.lastname }}</div>
+            <div class="panel-body">{{ person.address1 }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p>{{message}}</p>
+
+  <script src="http://code.jquery.com/jquery-2.0.3.min.js" data-require="jquery@*" data-semver="2.0.3"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" data-require="bootstrap@3.1.1" data-semver="3.1.1"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js" data-require="angular.js@1.2.17" data-semver="1.2.17"></script>
+  <script src="//ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.1.0.min.js"></script>
+  <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/AngularCloudDataConnector.js"></script>
+  <script src="//acdccdn.blob.core.windows.net/cdn/ajax/acdc/0.4/Providers/AzureService.js"></script>
+
+  <script>
+    var app = angular.module('demoApp', ['DataModule', 'AzureDataModule']);
+    app.controller('demoController', ['$scope', 'dataService', 'azureDataService',
+      function ($scope, dataService, azureDataService) {
+        $scope.message = "Getting data...";
+        azureDataService.addSource('https://angularpeoplev2.azure-mobile.net/', 'DDJpBYxoQEUznagCnyYNRYfkDxpYyz90', ['people']);
+        dataService.addSource(azureDataService);
+        dataService.connect(function(results) {
+          $scope.$apply($scope.message = "Data received.");
+        },$scope,4);
+      }
+    ]);
+  </script>
+</body>
+
+</html>
