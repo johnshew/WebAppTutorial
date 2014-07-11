@@ -17,6 +17,9 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="..\.gitignore">
+      <Link>.gitignore</Link>
+    </Content>
     <Content Include="app.css" />
     <Content Include="CloudDataFacebook.html" />
     <Content Include="index.html" />
@@ -32,10 +35,16 @@
     <Content Include="Lesson8.html" />
     <Content Include="Lesson9.html" />
     <Content Include="MasonryLayout.html" />
+<<<<<<< HEAD
+=======
+    <Content Include="Typescript\index.html" />
+>>>>>>> master
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
+    <TypeScriptCompile Include="Typescript\app.ts" />
+    <TypeScriptCompile Include="Typescript\References.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\README.md">
@@ -47,6 +56,9 @@
     <None Include="web.Release.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Typings\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
