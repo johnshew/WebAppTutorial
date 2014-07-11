@@ -39,7 +39,6 @@
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="Typescript\app.ts" />
     <TypeScriptCompile Include="Typescript\References.d.ts" />
   </ItemGroup>
