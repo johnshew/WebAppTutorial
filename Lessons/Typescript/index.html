@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp">
+
+<head>
+  <title>Lesson</title>
+  <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body ng-controller="demoController as controller">
+
+  <div class="alert alert-info">
+    <a href="#" class="close" data-dismiss="alert">&times;</a>
+    <p>Here we add some additional logic to the controller to enable a master/detail view with create, update, and delete operations.</p>
+  </div>
+
+  <div class="well" ng-hide="controller.showDetail">
+    Sort
+    <button class="btn btn-default" ng-click="controller.SortButtonClick('name')">
+      Name
+      <span ng-show="controller.sortField=='name'">{{(controller.sortAscending)?'+':'-'}}</span>
+    </button>
+    <button class="btn btn-default" ng-click="controller.SortButtonClick('age')">
+      Age
+      <span ng-show="controller.sortField=='age'">{{(controller.sortAscending)?'+':'-'}}</span>
+    </button>
+    Search
+    <input type="text" class="btn" ng-model="controller.filterText" placeholder="" />
+    Add<button class="btn btn-default" ng-click="controller.AddButtonClick()">New</button>{{ controller.sort }}
+  </div>
+
+  <div class="container-fluid" ng-hide="controller.showDetail">
+    <div ng-container class="row">
+      <div ng-repeat="person in controller.people | filter:controller.filterText | orderBy:controller.sort">
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="panel panel-default" ng-click="controller.EditPerson(person)">
+            <div class="panel-heading">{{ person.name }}</div>
+            <div class="panel-body">Age: {{ person.age }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" ng-show="controller.showDetail">
+    <input type="text" class="form-control" ng-model="controller.editPerson.name" placeholder="Name" />
+    <input type="text" class="form-control" ng-model="controller.editPerson.age" placeholder="Age" />
+    <button class="btn" ng-show="controller.editPerson.id == null" ng-click="controller.AddPerson()">Add</button>
+    <button class="btn" ng-show="controller.editPerson.id != null" ng-click="controller.UpdatePerson()">Update</button>
+    <button class="btn" ng-show="controller.editPerson.id != null" ng-click="controller.DeletePerson()">Delete</button>
+    <button class="btn" ng-click="controller.CancelDetail()">Cancel</button>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
