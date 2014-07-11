@@ -14,34 +14,41 @@ module demoApp.Controller {
     };
 
     export interface IDemoContollerScope extends ng.IScope {
-        greeting: string;
+        greeting: string; // Showing that you can still put properties and functions into scope
+        Hello(string): string;
     };
 
-    export class demoController {
+    export class myController {
 
         private _idGenerator: number;
-        static $inject = ['$scope', '$location']; // ensures $inject variable won't get clobbered by minify
         public people: Array<Person>;
         scope: IDemoContollerScope;
 
         public constructor($scope: IDemoContollerScope) {
-            this.scope = $scope;
+            this.scope = $scope;            
+
+            // examples showing how to put properties and functions into $scope.
             this.scope.greeting = "Hello World";
+            this.scope.Hello = (name) => //  use this form of function definition to ensure access to 'this' and proper scoping.
+            {
+                return "Hello " + name;
+            }
 
             this.people = [new Person('Chris', 10, 0), new Person('Alex', 11, 1), new Person('Ryan', 12, 1), new Person('Kelly', 13, 1), new Person('Sam', 13, 1)];
             this._idGenerator = this.people.length;
            
-            $scope.$watch('controller.sortField', () => { // very import for scoping!!!
+            $scope.$watch('controller.sortField', () => // This form of function defintition very import for scoping!!!
+            { 
                 console.log('sortField changed');
                 this.sortAscending = true;
             });
 
-            this.scope.$watch('controller.sortField+controller.sortAscending', () => {  // using this.scope (instead of $scope) means you can easily move the code elsewhere.
+            this.scope.$watch('controller.sortField+controller.sortAscending', () => {  // Note that using this.scope... (instead of $scope...) means you can easily move the code elsewhere.
                 console.log('sortField+sortAscending changed');
                 this.sort = ((this.sortAscending) ? "+" : "-") + this.sortField;
             });
 
-            this.sortField = 'name'; // will trigger watch
+            this.sortField = 'name'; // This will trigger the $scope.$watch statements
         }
 
         public sortField: string;
@@ -55,34 +62,37 @@ module demoApp.Controller {
             this.sortAscending = !this.sortAscending;
         }
 
-        // showDetail, detailPerson, editPerson(person)
+        // showDetail, editPerson, EditPerson()
         public showDetail: boolean;
-        public editPerson: Person;
-
-        public AddButtonClick() {
+        public editPerson: Person; // Temporary person to hold edits to a new or existing person.  
+        
+        public StartAddPerson() {
             this.editPerson = { 'name': null, 'age': null, id: null };
             this.showDetail = true;
         }
 
-        public EditPerson(person) {
+        public StartEditPerson(person: Person) // Start editing an existing person.
+        {
             this.editPerson = JSON.parse(JSON.stringify(person));
             this.showDetail = true;
         }
 
-        public AddPerson = function () {
+        public CancelEditPerson() { // Cancel editting.
+            this.editPerson = { 'name': null, 'age': null, id: null };
+            this.showDetail = null;
+        }
+
+
+        public AddPerson()
+        {
             this.editPerson.id = this._idGenerator++;
             this.people.push(this.editPerson);
-            this.CancelDetail();
+            this.CancelEditPerson();
         }
 
-        public DeletePerson() {            
-            for (var i = 0; i < this.people.length; i++) {
-                if (this.people[i].id == this.editPerson.id) { this.people.splice(i, 1); break; }
-            }
-            this.CancelDetail();
-        }
 
-        public UpdatePerson() {
+        public UpdatePerson()
+        {
             var person = this.editPerson;
             for (var i = 0; i < this.people.length; i++) {
                 if (this.people[i].id == person.id) {
@@ -90,16 +100,19 @@ module demoApp.Controller {
                     break;
                 }
             }
-            this.CancelDetail();
+            this.CancelEditPerson();
         }
 
-        public CancelDetail() {
-            this.editPerson = { 'name': null, 'age': null, id: null };
-            this.showDetail = null;
+        public DeletePerson()
+        {            
+            for (var i = 0; i < this.people.length; i++) {
+                if (this.people[i].id == this.editPerson.id) { this.people.splice(i, 1); break; }
+            }
+            this.CancelEditPerson();
         }
     }
 }
 
 // Angular specifics
 var app = angular.module('demoApp', []);
-app.controller('demoController', demoApp.Controller.demoController);
+app.controller('demoController', demoApp.Controller.myController);

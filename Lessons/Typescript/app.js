@@ -16,16 +16,16 @@ var demoApp;
 
         ;
 
-        var demoController = (function () {
-            function demoController($scope) {
+        var myController = (function () {
+            function myController($scope) {
                 var _this = this;
-                this.AddPerson = function () {
-                    this.editPerson.id = this._idGenerator++;
-                    this.people.push(this.editPerson);
-                    this.CancelDetail();
-                };
                 this.scope = $scope;
+
+                // examples showing how to put properties and functions into $scope.
                 this.scope.greeting = "Hello World";
+                this.scope.Hello = function (name) {
+                    return "Hello " + name;
+                };
 
                 this.people = [new Person('Chris', 10, 0), new Person('Alex', 11, 1), new Person('Ryan', 12, 1), new Person('Kelly', 13, 1), new Person('Sam', 13, 1)];
                 this._idGenerator = this.people.length;
@@ -40,34 +40,35 @@ var demoApp;
                     _this.sort = ((_this.sortAscending) ? "+" : "-") + _this.sortField;
                 });
 
-                this.sortField = 'name'; // will trigger watch
+                this.sortField = 'name'; // This will trigger the $scope.$watch statements
             }
-            demoController.prototype.SortButtonClick = function (field) {
+            myController.prototype.SortButtonClick = function (field) {
                 this.sortField = field;
                 this.sortAscending = !this.sortAscending;
             };
 
-            demoController.prototype.AddButtonClick = function () {
+            myController.prototype.StartAddPerson = function () {
                 this.editPerson = { 'name': null, 'age': null, id: null };
                 this.showDetail = true;
             };
 
-            demoController.prototype.EditPerson = function (person) {
+            myController.prototype.StartEditPerson = function (person) {
                 this.editPerson = JSON.parse(JSON.stringify(person));
                 this.showDetail = true;
             };
 
-            demoController.prototype.DeletePerson = function () {
-                for (var i = 0; i < this.people.length; i++) {
-                    if (this.people[i].id == this.editPerson.id) {
-                        this.people.splice(i, 1);
-                        break;
-                    }
-                }
-                this.CancelDetail();
+            myController.prototype.CancelEditPerson = function () {
+                this.editPerson = { 'name': null, 'age': null, id: null };
+                this.showDetail = null;
             };
 
-            demoController.prototype.UpdatePerson = function () {
+            myController.prototype.AddPerson = function () {
+                this.editPerson.id = this._idGenerator++;
+                this.people.push(this.editPerson);
+                this.CancelEditPerson();
+            };
+
+            myController.prototype.UpdatePerson = function () {
                 var person = this.editPerson;
                 for (var i = 0; i < this.people.length; i++) {
                     if (this.people[i].id == person.id) {
@@ -75,22 +76,26 @@ var demoApp;
                         break;
                     }
                 }
-                this.CancelDetail();
+                this.CancelEditPerson();
             };
 
-            demoController.prototype.CancelDetail = function () {
-                this.editPerson = { 'name': null, 'age': null, id: null };
-                this.showDetail = null;
+            myController.prototype.DeletePerson = function () {
+                for (var i = 0; i < this.people.length; i++) {
+                    if (this.people[i].id == this.editPerson.id) {
+                        this.people.splice(i, 1);
+                        break;
+                    }
+                }
+                this.CancelEditPerson();
             };
-            demoController.$inject = ['$scope', '$location'];
-            return demoController;
+            return myController;
         })();
-        Controller.demoController = demoController;
+        Controller.myController = myController;
     })(demoApp.Controller || (demoApp.Controller = {}));
     var Controller = demoApp.Controller;
 })(demoApp || (demoApp = {}));
 
 // Angular specifics
 var app = angular.module('demoApp', []);
-app.controller('demoController', demoApp.Controller.demoController);
+app.controller('demoController', demoApp.Controller.myController);
 //# sourceMappingURL=app.js.map

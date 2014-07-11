@@ -16,23 +16,21 @@
   <div class="well" ng-hide="controller.showDetail">
     Sort
     <button class="btn btn-default" ng-click="controller.SortButtonClick('name')">
-      Name
-      <span ng-show="controller.sortField=='name'">{{(controller.sortAscending)?'+':'-'}}</span>
+      Name <span ng-show="controller.sortField=='name'">{{(controller.sortAscending)?'+':'-'}}</span>
     </button>
     <button class="btn btn-default" ng-click="controller.SortButtonClick('age')">
-      Age
-      <span ng-show="controller.sortField=='age'">{{(controller.sortAscending)?'+':'-'}}</span>
+      Age <span ng-show="controller.sortField=='age'">{{(controller.sortAscending)?'+':'-'}}</span>
     </button>
     Search
     <input type="text" class="btn" ng-model="controller.filterText" placeholder="" />
-    Add<button class="btn btn-default" ng-click="controller.AddButtonClick()">New</button>{{ controller.sort }}
+    Add<button class="btn btn-default" ng-click="controller.StartAddPerson()">New</button>
   </div>
 
   <div class="container-fluid" ng-hide="controller.showDetail">
     <div ng-container class="row">
       <div ng-repeat="person in controller.people | filter:controller.filterText | orderBy:controller.sort">
         <div class="col-sm-6 col-md-4 col-lg-3">
-          <div class="panel panel-default" ng-click="controller.EditPerson(person)">
+          <div class="panel panel-default" ng-click="controller.StartEditPerson(person)">
             <div class="panel-heading">{{ person.name }}</div>
             <div class="panel-body">Age: {{ person.age }}</div>
           </div>
@@ -47,7 +45,7 @@
     <button class="btn" ng-show="controller.editPerson.id == null" ng-click="controller.AddPerson()">Add</button>
     <button class="btn" ng-show="controller.editPerson.id != null" ng-click="controller.UpdatePerson()">Update</button>
     <button class="btn" ng-show="controller.editPerson.id != null" ng-click="controller.DeletePerson()">Delete</button>
-    <button class="btn" ng-click="controller.CancelDetail()">Cancel</button>
+    <button class="btn" ng-click="controller.CancelEditPerson()">Cancel</button>
   </div>
 
   <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
